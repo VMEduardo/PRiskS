@@ -35,9 +35,6 @@ def plot_individual_scores(scores_filename):
         plt.xlabel('Disease')
         plt.ylabel('Risk Score')
 
-        # rotate tags
-        plt.xticks(rotation=90)
-
         # Save graph
         plt.savefig(os.path.join(output_directory, f"{individual}_PRS.png"))
 
