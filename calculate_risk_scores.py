@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from common import load_snp_weights, snp_weights
 from collections import defaultdict
+from math import exp
 
 def get_genotype_weight(snp_id, genotype, snp_weights):
     """
@@ -85,7 +86,8 @@ def calculate_all_scores(filtered_vcf_directory, output_filename):
             # Since the filename contains the individual name
             individual_name = filename.replace('_filtered.vcf', '')
             for (disease, index), score in individual_scores.items():
-                scores.append({'Individual': f"{individual_name}_{index}", 'Disease': disease, 'Score': score})
+                or_value = exp(score)
+                scores.append({'Individual': f"{individual_name}_{index}", 'Disease': disease, 'Score': score, 'OR': or_value})
 
     scores_df = pd.DataFrame(scores)
     scores_df.to_csv(output_filename, index=False)
