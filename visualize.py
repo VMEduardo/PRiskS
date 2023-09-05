@@ -24,16 +24,16 @@ def plot_individual_scores(scores_filename):
         individual_df = scores_df[scores_df['Individual'] == individual]
         
         # Skip individuals with zero PRS
-        if individual_df['Score'].sum() == 0:
+        if individual_df['OR'].sum() == 0:
             continue
         
         plt.figure()
-        plt.bar(individual_df['Disease'], individual_df['Score'])
+        plt.bar(individual_df['Disease'], individual_df['OR'])
 
         # Titles and tags
         plt.title('PRS for ' + individual)
         plt.xlabel('Disease')
-        plt.ylabel('Risk Score')
+        plt.ylabel('Odds Ratio (OR)')
 
         # Save graph
         plt.savefig(os.path.join(output_directory, f"{individual}_PRS.png"))
